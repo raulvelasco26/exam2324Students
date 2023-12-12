@@ -3,7 +3,6 @@ package cat.tecnocampus.notes2324.api;
 import cat.tecnocampus.notes2324.application.NotesService;
 import cat.tecnocampus.notes2324.application.PermissionService;
 import cat.tecnocampus.notes2324.application.dtos.*;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class NotesController {
     //TODO 2.1: when calling this entry point, it must return the list of users ordered. You only need to implement the query in the repository
     // (go to: todo2.2)
     @GetMapping("/users/ratedbynotes")
-    public List<UserDTO> getUsersRatedByNotes() {
+    public List<UserRatedDTO> getUsersRatedByNotes() {
         return notesService.getUsersRatedByNotes();
     }
 

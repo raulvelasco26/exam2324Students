@@ -88,7 +88,7 @@ public class NotesService {
 
     //TODO 2.2 this calls the actual query in the repository. Uncomment the line and delete the return statement of an empty list.
     // Go to: todo2.3
-    public List<UserDTO> getUsersRatedByNotes() {
+    public List<UserRatedDTO> getUsersRatedByNotes() {
         //return userRepository.findUsersRatedByNotes();
         return new ArrayList<>();
     }

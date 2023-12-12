@@ -3,7 +3,6 @@ package cat.tecnocampus.notes2324.domain;
 import cat.tecnocampus.notes2324.configuration.TsidUtils;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 // TODO 3.1 You need to complete this class
 @Entity

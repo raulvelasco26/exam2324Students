@@ -1,6 +1,9 @@
 package cat.tecnocampus.notes2324.application;
 
-import cat.tecnocampus.notes2324.application.dtos.*;
+import cat.tecnocampus.notes2324.application.dtos.NoteDTO;
+import cat.tecnocampus.notes2324.application.dtos.PermissionCreation;
+import cat.tecnocampus.notes2324.application.dtos.PermissionDTO;
+import cat.tecnocampus.notes2324.application.dtos.UserDTO;
 import cat.tecnocampus.notes2324.application.exceptions.NoteNotFoundException;
 import cat.tecnocampus.notes2324.application.exceptions.NotePermissionNotFoundException;
 import cat.tecnocampus.notes2324.application.exceptions.UserDoesNotOwnNoteException;

@@ -1,7 +1,6 @@
 package cat.tecnocampus.notes2324.domain;
 
 import cat.tecnocampus.notes2324.configuration.TsidUtils;
-import io.hypersistence.tsid.TSID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
