@@ -88,9 +88,8 @@ public class NotesService {
 
     //TODO 2.2 this calls the actual query in the repository. Uncomment the line and delete the return statement of an empty list.
     // Go to: todo2.3
-    public List<UserRatedDTO> getUsersRatedByNotes() {
-        //return userRepository.findUsersRatedByNotes();
-        return new ArrayList<>();
+    public List<UserDTO> getUsersRatedByNotes() {
+        return userRepository.findUsersRatedByNotes();
     }
 
     // TODO 3.5 It must add a comment to a note only if the user is the owner of the note.

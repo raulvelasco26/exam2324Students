@@ -29,7 +29,7 @@ public class NotesController {
     //TODO 2.1: when calling this entry point, it must return the list of users ordered. You only need to implement the query in the repository
     // (go to: todo2.2)
     @GetMapping("/users/ratedbynotes")
-    public List<UserRatedDTO> getUsersRatedByNotes() {
+    public List<UserDTO> getUsersRatedByNotes() {
         return notesService.getUsersRatedByNotes();
     }
 
