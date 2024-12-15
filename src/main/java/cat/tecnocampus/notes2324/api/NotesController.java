@@ -3,6 +3,7 @@ package cat.tecnocampus.notes2324.api;
 import cat.tecnocampus.notes2324.application.NotesService;
 import cat.tecnocampus.notes2324.application.PermissionService;
 import cat.tecnocampus.notes2324.application.dtos.*;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,12 +66,12 @@ public class NotesController {
 
     @PostMapping("/users/{ownerId}/notes")
     @ResponseStatus(HttpStatus.CREATED)
-    public void newUserNote(@PathVariable long ownerId, @RequestBody NoteCreate noteCreate) {
+    public void newUserNote(@PathVariable long ownerId, @RequestBody @Valid NoteCreate noteCreate) {
         notesService.createUserNote(ownerId, noteCreate);
     }
 
     @PutMapping("/users/{ownerId}/notes")
-    public void updateUserNote(@PathVariable long ownerId, @RequestBody NoteCreate noteUpdate) {
+    public void updateUserNote(@PathVariable long ownerId, @RequestBody @Valid NoteCreate noteUpdate) {
         notesService.updateUserNote(ownerId, noteUpdate);
     }
 
