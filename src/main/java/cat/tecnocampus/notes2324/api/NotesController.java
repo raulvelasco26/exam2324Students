@@ -82,8 +82,17 @@ public class NotesController {
 
     //TODO 3.4: you need to implement the entry point to get the comments of a note: GET /users/{userId}/notes/{noteId}/comments
     //  It must return a list of CommentDTO. It should call the method in the service: getNoteComments
+    @GetMapping("/users/{userId}/notes/{noteId}/comments")
+    public List<CommentDTO> getCommentsByNote(@PathVariable Long userId, @PathVariable Long noteId){
+        return notesService.getNoteComments(userId, noteId);
+    }
 
     //TODO 3.3: you need to implement the entry point to add a comment to a note. POST /users/{userId}/notes/{noteId}/comments
     // It must receive a CommentDTO and call the method in the service: addNoteComment
+    @PostMapping("/users/{userId}/notes/{noteId}/comments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addNoteComment(@PathVariable Long userId, @PathVariable Long noteId, @RequestBody CommentDTO commentDTO){
+        notesService.addNoteComment(userId, noteId, commentDTO);
+    }
 
 }

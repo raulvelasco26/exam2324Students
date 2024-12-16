@@ -3,6 +3,7 @@ package cat.tecnocampus.notes2324.domain;
 import cat.tecnocampus.notes2324.configuration.TsidUtils;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 // TODO 3.1 You need to complete this class
 @Entity
@@ -13,6 +14,8 @@ public class Comment {
     private String body;
 
     // TODO 3.1.1 there is a relationship between comments and notes. You need to complete the relationship
+    @ManyToOne
+    private Note note;
 
     public Comment() {
         id = TsidUtils.getTsidFactory(1).generate().toLong();
@@ -50,10 +53,10 @@ public class Comment {
 
     // TODO 3.1.2 you need to complete the following methods
     public Note getNote() {
-        return null;
+        return note;
     }
 
     public void setNote(Note note) {
-
+        this.note=note;
     }
 }

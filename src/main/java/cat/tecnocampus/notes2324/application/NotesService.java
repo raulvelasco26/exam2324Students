@@ -2,9 +2,12 @@ package cat.tecnocampus.notes2324.application;
 
 import cat.tecnocampus.notes2324.application.dtos.*;
 import cat.tecnocampus.notes2324.application.exceptions.NoteNotFoundException;
+import cat.tecnocampus.notes2324.application.exceptions.UserDoesNotOwnNoteException;
 import cat.tecnocampus.notes2324.application.exceptions.UserNotFoundException;
+import cat.tecnocampus.notes2324.application.mapper.CommentMapper;
 import cat.tecnocampus.notes2324.application.mapper.NoteMapper;
 import cat.tecnocampus.notes2324.application.mapper.UserMapper;
+import cat.tecnocampus.notes2324.domain.Comment;
 import cat.tecnocampus.notes2324.domain.Note;
 import cat.tecnocampus.notes2324.domain.Tag;
 import cat.tecnocampus.notes2324.domain.User;
@@ -94,12 +97,23 @@ public class NotesService {
 
     // TODO 3.5 It must add a comment to a note only if the user is the owner of the note.
     public void addNoteComment(long userId, long noteId, CommentDTO commentDTO) {
+        Note note = noteRepository.findById(noteId).orElseThrow(() -> new NoteNotFoundException(noteId));
+        if (!note.isOwner(userId))
+            throw new UserDoesNotOwnNoteException(userId, noteId);
+        Comment comment = new Comment(commentDTO.title(), commentDTO.body());
+        comment.setNote(note);
+        commentRepository.save(comment);
     }
 
     // TODO 3.6 It must return a list of CommentDTO of the note only if the user is the owner of the note or has permission to view it.
     //    Otherwise it returns an empty list.
     public List<CommentDTO> getNoteComments(long userId, long noteId) {
-        return new ArrayList<>();
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        Note note = noteRepository.findById(noteId).orElseThrow(() -> new NoteNotFoundException(noteId));
+
+        if (note.isOwner(userId) || permissionService.userCanViewNote(user, note)) {
+            return commentRepository.findAllByNote(note).stream().map(CommentMapper::commentToCommentDTO).toList();
+        } else return new ArrayList<>();
     }
 }
 
