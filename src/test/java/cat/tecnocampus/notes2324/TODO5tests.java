@@ -18,18 +18,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TODO5tests {
+
     @Autowired
     private MockMvc mockMvc;
 
     //TODO 5.1: implement the happy path test for getting the user with id 1
     @Test
     void getOneExistingUser() throws Exception {
-        assertTrue(false); // delete this line when you implement the test
+        mockMvc.perform(get("/users/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // Assuming you have a User class with fields like id, name, etc.
+                .andExpect(jsonPath("$.id").value(1))
+        // Add more assertions for other fields of the User object as needed
+        ;
     }
 
     //TODO 5.2: implement the test for getting a non existing user. User with id 100
     @Test
     void getOneNonExistingUser() throws Exception {
-        assertTrue(false); // delete this line when you implement the test
+        mockMvc.perform(get("/users/100"))
+                .andExpect(status().isBadRequest());
     }
 }
