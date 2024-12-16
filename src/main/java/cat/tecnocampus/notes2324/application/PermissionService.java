@@ -93,13 +93,15 @@ public boolean userCanViewNote (User user, Note note) {
     @Transactional
     public void revokePermission(long ownerId, PermissionCreation permissionCreation) {
         // TODO 4.2 get the note from the repository. If it does not exist, throw a NoteNotFoundException
-
+        Note note=noteRepository.findById(permissionCreation.noteId()).orElseThrow(()->new NoteNotFoundException(permissionCreation.noteId()));
         // TODO 4.3 check if the user is the owner of the note. If not, throw a UserDoesNotOwnNoteException
+        if(!note.isOwner(ownerId)) throw new UserDoesNotOwnNoteException(ownerId,permissionCreation.noteId());
 
 
         if (!permissionCreation.canEdit() && !permissionCreation.canView()) {
             //TODO 4.4 delete the permission from the repository, since user does not have any permission
-
+            NotePermissionId notePermissionId=new NotePermissionId(permissionCreation.noteId(),permissionCreation.allowedId());
+            notePermissionRepository.deleteById(notePermissionId);
         }
         else { // you do not need to do anything here. The code already updates the permission
             updatePermission(ownerId, permissionCreation);
